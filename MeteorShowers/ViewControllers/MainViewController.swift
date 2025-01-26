@@ -33,6 +33,7 @@ final class MainViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.title = "Meteor showers"
         setupUI()
     }
 
@@ -45,6 +46,7 @@ private extension MainViewController {
     
     func setupUI() {
         setDelegates()
+        
         view.addSubview(mainStackView)
         mainStackView.addArrangedSubview(topView)
         mainStackView.addArrangedSubview(tableView)
@@ -53,14 +55,14 @@ private extension MainViewController {
         
         // constraints
         mainStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().offset(8)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview()
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
         
         topView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(200) // constraint topview height
             make.width.equalToSuperview()
         }
         

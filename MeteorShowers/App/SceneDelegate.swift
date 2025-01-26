@@ -11,13 +11,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let customWindowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(frame: customWindowScene.coordinateSpace.bounds)
         window?.windowScene = customWindowScene
-        window?.rootViewController = MainViewController()
+        
+        let mainViewController = MainViewController()
+        mainViewController.title = "Meteor Showers"
+        
+        let navigationController = UINavigationController(rootViewController: mainViewController)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
