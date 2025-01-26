@@ -32,7 +32,7 @@ final class MainViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .bg
+        view.backgroundColor = .mainBg
         setupUI()
     }
 
@@ -55,13 +55,15 @@ private extension MainViewController {
         
         // constraints
         mainStackView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top) // changed to respect safe area
         }
         
         topView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
             make.height.equalTo(200) // constraint topview height
+//            make.width.equalToSuperview().inset(8)
         }
         
         tableView.snp.makeConstraints { make in

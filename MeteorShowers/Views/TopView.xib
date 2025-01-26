@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,29 +15,30 @@
             <rect key="frame" x="0.0" y="0.0" width="363" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Lh3-TW-hc0">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="Lh3-TW-hc0">
                     <rect key="frame" x="0.0" y="0.0" width="363" height="150"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7fE-rz-sBk" userLabel="Sun Stack View">
-                            <rect key="frame" x="0.0" y="0.0" width="121" height="150"/>
+                            <rect key="frame" x="0.0" y="0.0" width="130.33333333333334" height="150"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="g89-qq-Cmg" userLabel="Rise Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="121" height="75"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="130.33333333333334" height="75"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JB1-to-8LG" userLabel="Icon Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="60.666666666666664" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="65" height="75"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DK8-fw-qyw">
-                                                    <rect key="frame" x="0.0" y="0.3333333333333357" width="60.666666666666664" height="75.666666666666657"/>
+                                                    <rect key="frame" x="0.0" y="2.3333333333333357" width="65" height="71.666666666666657"/>
                                                     <imageReference key="image" image="sunrise.fill" catalog="system" renderingMode="original"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                                 </imageView>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIs-S8-mpT" userLabel="Time Stack View">
-                                            <rect key="frame" x="60.666666666666657" y="0.0" width="60.333333333333343" height="75"/>
+                                            <rect key="frame" x="65" y="0.0" width="65.333333333333314" height="75"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07:02" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbT-fC-rK4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="75"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -46,22 +48,23 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="bo6-lk-qjK" userLabel="Dusk Stack View">
-                                    <rect key="frame" x="0.0" y="75" width="121" height="75"/>
+                                    <rect key="frame" x="0.0" y="75" width="130.33333333333334" height="75"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ri-pq-LPg" userLabel="Icon Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="60.666666666666664" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="65" height="75"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KxC-DV-xtd">
-                                                    <rect key="frame" x="0.0" y="0.3333333333333357" width="60.666666666666664" height="75.666666666666657"/>
+                                                    <rect key="frame" x="0.0" y="2.3333333333333357" width="65" height="71.666666666666657"/>
                                                     <imageReference key="image" image="sunset.fill" catalog="system" renderingMode="original"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small"/>
                                                 </imageView>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U5G-D2-6Nx" userLabel="Time Stack View">
-                                            <rect key="frame" x="60.666666666666657" y="0.0" width="60.333333333333343" height="75"/>
+                                            <rect key="frame" x="65" y="0.0" width="65.333333333333314" height="75"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18:13" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLN-r9-qnP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="65.333333333333329" height="75"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -73,13 +76,13 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Rbp-Ks-0Jy" userLabel="Forecast Stack View">
-                            <rect key="frame" x="121" y="0.0" width="121" height="150"/>
+                            <rect key="frame" x="133.33333333333334" y="0.0" width="66" height="150"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UP-Yn-lHd" userLabel="Temp Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="121" height="75"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="66" height="75"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 3 C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LsH-ur-UYD">
-                                            <rect key="frame" x="0.0" y="0.0" width="121" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="66" height="75"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -87,10 +90,10 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HBb-Qs-RY1" userLabel="Icon Stack View">
-                                    <rect key="frame" x="0.0" y="75" width="121" height="75"/>
+                                    <rect key="frame" x="0.0" y="75" width="66" height="75"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZZk-Nb-Urp">
-                                            <rect key="frame" x="0.0" y="0.3333333333333357" width="121.66666666666667" height="74.666666666666657"/>
+                                            <rect key="frame" x="0.0" y="0.3333333333333357" width="66.666666666666671" height="74.666666666666657"/>
                                             <imageReference key="image" image="cloud.sun.fill" catalog="system" renderingMode="original"/>
                                         </imageView>
                                     </subviews>
@@ -98,25 +101,25 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kxa-nk-kcN" userLabel="Moon Stack View">
-                            <rect key="frame" x="242" y="0.0" width="121" height="150"/>
+                            <rect key="frame" x="202.33333333333337" y="0.0" width="160.66666666666663" height="150"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ljf-yW-EmY" userLabel="Info Stack View">
-                                    <rect key="frame" x="0.0" y="0.0" width="121" height="75"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="160.66666666666666" height="75"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kas-nM-RSd" userLabel="Icon Stack View">
-                                            <rect key="frame" x="0.0" y="0.0" width="60.666666666666664" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="75"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Aa7-Pz-BTs">
-                                                    <rect key="frame" x="0.0" y="0.6666666666666643" width="60.666666666666664" height="73.666666666666686"/>
+                                                    <rect key="frame" x="0.0" y="0.6666666666666643" width="80.333333333333329" height="73.666666666666686"/>
                                                     <imageReference key="image" image="moonphase.waning.crescent.inverse" catalog="system" renderingMode="original"/>
                                                 </imageView>
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9L1-h6-Z46" userLabel="Illumination Stack View">
-                                            <rect key="frame" x="60.666666666666686" y="0.0" width="60.333333333333343" height="75"/>
+                                            <rect key="frame" x="80.333333333333343" y="0.0" width="80.333333333333343" height="75"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FvE-Tv-ohL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60.333333333333336" height="75"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="80.333333333333329" height="75"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -126,10 +129,10 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRy-3E-eO3" userLabel="Phase Stack View">
-                                    <rect key="frame" x="0.0" y="75" width="121" height="75"/>
+                                    <rect key="frame" x="0.0" y="75" width="160.66666666666666" height="75"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Waning Crescending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tci-qO-cjF">
-                                            <rect key="frame" x="0.0" y="0.0" width="121" height="75"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="160.66666666666666" height="75"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -142,7 +145,7 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" red="0.75741586004154415" green="0.82036141857988487" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" name="topBg"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Lh3-TW-hc0" secondAttribute="bottom" id="1lL-vv-QbN"/>
                 <constraint firstItem="Lh3-TW-hc0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Wx3-1i-78V"/>
@@ -167,5 +170,8 @@
         <image name="moonphase.waning.crescent.inverse" catalog="system" width="128" height="123"/>
         <image name="sunrise.fill" catalog="system" width="128" height="104"/>
         <image name="sunset.fill" catalog="system" width="128" height="104"/>
+        <namedColor name="topBg">
+            <color red="0.21928271349966083" green="0.22261006658239899" blue="0.74603334407216493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
