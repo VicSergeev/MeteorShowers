@@ -18,14 +18,13 @@ final class MainViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .fill
-        stackView.distribution = .fill // that will accept topView height of 200 and let TV to get the rest of space
+        stackView.distribution = .fill // that will accept topView height of 160 and let TV to get the rest of space
         
         return stackView
     }()
     
     // MARK: - creating view with uiview extension
     lazy var topView: TopView = .fromNib()
-    
     
     // MARK: - UITableView
     var tableView = UITableView()
@@ -51,26 +50,22 @@ private extension MainViewController {
         mainStackView.addArrangedSubview(topView)
         mainStackView.addArrangedSubview(tableView)
         
+        // MARK: - Cell registration
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         // constraints
         mainStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top) // Changed to respect safe area
-            make.bottom.equalToSuperview()
         }
         
         topView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
+            make.top.width.leading.trailing.equalToSuperview()
             make.height.equalTo(160) // constraint topview height
-            make.width.equalToSuperview()
         }
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom) // stick top of TV to the bottom of topView
-            make.leading.trailing.equalToSuperview()
-//            make.bottom.equalToSuperview() // let TV to get the rest of space
         }
         
     }
