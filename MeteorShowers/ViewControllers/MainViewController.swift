@@ -10,25 +10,65 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     
+    // MARK: - Setting UI
+    
+    // MARK: - Main stack
+    lazy private var mainStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fill // that will accept topView height of 200 and let TV to get the rest of space
+        
+        return stackView
+    }()
+    
+    // MARK: - creating view with uiview extension
+    lazy var topView: TopView = .fromNib()
+    
+    
     // MARK: - UITableView
     var tableView = UITableView()
 
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        setupUI()
     }
 
 
 }
 
-// MARK: - Configuring UITableView
+// MARK: - Configuring UI
 
 private extension MainViewController {
-    func tableViewConfig() {
+    
+    func setupUI() {
         setDelegates()
-        view.addSubview(tableView)
+        view.addSubview(mainStackView)
+        mainStackView.addArrangedSubview(topView)
+        mainStackView.addArrangedSubview(tableView)
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+        // constraints
+        mainStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().offset(8)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+        }
+        
+        topView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(200)
+            make.width.equalToSuperview()
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(topView.snp.bottom) // stick top of TV to the bottom of topView
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview() // let TV to get the rest of space
+        }
         
     }
 }
@@ -47,7 +87,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return cell
     }
 
 }
