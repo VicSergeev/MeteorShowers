@@ -29,5 +29,24 @@ final class TopView: UIView {
         // Настройка скругления углов
         self.layer.cornerRadius = 9
         self.layer.masksToBounds = true
+        
+        // Configure SF Symbols
+        configureImageViews()
+    }
+    
+    private func configureImageViews() {
+        // Configure forecast icon
+        if let forecastIcon = UIImage(systemName: "cloud.sun.fill") {
+            forecastIconImageView.image = forecastIcon
+            forecastIconImageView.contentMode = .scaleAspectFit
+            forecastIconImageView.tintColor = .systemBlue
+        }
+        
+        // Configure moon phase icon
+        if let moonPhaseIcon = UIImage(systemName: "moonphase.waning.crescent.inverse") {
+            moonPhaseIconImageView.image = moonPhaseIcon
+            moonPhaseIconImageView.contentMode = .scaleAspectFit
+            moonPhaseIconImageView.tintColor = .systemBlue
+        }
     }
 }
