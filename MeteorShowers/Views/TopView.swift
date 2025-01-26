@@ -24,10 +24,10 @@ final class TopView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.clipsToBounds = true
-        
-        // Настройка скругления углов
-        self.layer.cornerRadius = 9
-        self.layer.masksToBounds = true
+//        self.clipsToBounds = true
+//        
+//        // Настройка скругления углов
+//        self.layer.cornerRadius = 9
+//        self.layer.masksToBounds = true
     }
 }

@@ -18,10 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = customWindowScene
         
         let mainViewController = MainViewController()
-        mainViewController.title = "Meteor Showers"
         
         let navigationController = UINavigationController(rootViewController: mainViewController)
         window?.rootViewController = navigationController
+        
+        mainViewController.title = "Meteor Showers"
         window?.makeKeyAndVisible()
     }
 

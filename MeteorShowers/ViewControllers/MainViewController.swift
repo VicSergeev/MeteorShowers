@@ -33,7 +33,7 @@ final class MainViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.title = "Meteor showers"
+        view.backgroundColor = .bg
         setupUI()
     }
 
@@ -56,20 +56,21 @@ private extension MainViewController {
         // constraints
         mainStackView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top) // Changed to respect safe area
+            make.bottom.equalToSuperview()
         }
         
         topView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(200) // constraint topview height
+            make.height.equalTo(160) // constraint topview height
             make.width.equalToSuperview()
         }
         
         tableView.snp.makeConstraints { make in
             make.top.equalTo(topView.snp.bottom) // stick top of TV to the bottom of topView
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview() // let TV to get the rest of space
+//            make.bottom.equalToSuperview() // let TV to get the rest of space
         }
         
     }
