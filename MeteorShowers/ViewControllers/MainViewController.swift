@@ -56,7 +56,7 @@ private extension MainViewController {
         // constraints
         mainStackView.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top) // Changed to respect safe area
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top) // changed to respect safe area
         }
         
         topView.snp.makeConstraints { make in
