@@ -60,12 +60,12 @@ private extension MainViewController {
         }
         
         topView.snp.makeConstraints { make in
-            make.top.width.leading.trailing.equalToSuperview()
-            make.height.equalTo(160) // constraint topview height
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(200) // constraint topview height
         }
         
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom) // stick top of TV to the bottom of topView
+            make.leading.trailing.equalToSuperview()
         }
         
     }
