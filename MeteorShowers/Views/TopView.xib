@@ -150,6 +150,15 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Lh3-TW-hc0" secondAttribute="trailing" id="s3B-YN-M0u"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="IlluminationLabel" destination="FvE-Tv-ohL" id="yy2-E3-Bkw"/>
+                <outlet property="forecastIconImageView" destination="ZZk-Nb-Urp" id="PCh-Tj-ifl"/>
+                <outlet property="moonPhaseIconImageView" destination="Aa7-Pz-BTs" id="98K-4b-CJe"/>
+                <outlet property="moonPhaseLabel" destination="tci-qO-cjF" id="I07-lb-YyX"/>
+                <outlet property="sunriseTimeLabel" destination="dbT-fC-rK4" id="7rz-g9-6vt"/>
+                <outlet property="sunsetTimeLabel" destination="mLN-r9-qnP" id="MSN-1f-KaJ"/>
+                <outlet property="tempLabel" destination="LsH-ur-UYD" id="Eft-4N-OCI"/>
+            </connections>
             <point key="canvasLocation" x="107.63358778625954" y="241.5492957746479"/>
         </view>
     </objects>
