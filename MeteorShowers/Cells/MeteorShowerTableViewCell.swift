@@ -115,7 +115,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     // ZHR label
     private lazy var ZHRLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = .gray
         label.text = ""
         return label
