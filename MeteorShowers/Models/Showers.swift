@@ -17,37 +17,55 @@ final class Showers {
         [
             MeteorShower(
                 name: "Quadrantids",
-                dateBegin: dateFormatter.date(from: "01.01.2025")!,
+                dateBegin: dateFormatter.date(from: "28.12.2024")!,
                 datePeak: dateFormatter.date(from: "03.01.2025")!,
-                dateEnd: dateFormatter.date(from: "05.01.2025")!,
-                zhr: 120,
+                dateEnd: dateFormatter.date(from: "12.01.2025")!,
+                zhr: 80,
                 speed: 41,
                 parentBody: "2003 EH1"
             ),
             MeteorShower(
+                name: "Alpha Centaurids",
+                dateBegin: dateFormatter.date(from: "31.01.2025")!,
+                datePeak: dateFormatter.date(from: "08.02.2025")!,
+                dateEnd: dateFormatter.date(from: "20.02.2025")!,
+                zhr: 6,
+                speed: 58,
+                parentBody: "Unknown"
+            ),
+            MeteorShower(
                 name: "Lyrids",
-                dateBegin: dateFormatter.date(from: "16.04.2025")!,
+                dateBegin: dateFormatter.date(from: "14.04.2025")!,
                 datePeak: dateFormatter.date(from: "22.04.2025")!,
-                dateEnd: dateFormatter.date(from: "25.04.2025")!,
+                dateEnd: dateFormatter.date(from: "30.04.2025")!,
                 zhr: 18,
                 speed: 49,
-                parentBody: "C/1861 G1 (Thatcher)"
+                parentBody: "C/1861 G1"
             ),
             MeteorShower(
                 name: "Eta Aquariids",
                 dateBegin: dateFormatter.date(from: "19.04.2025")!,
-                datePeak: dateFormatter.date(from: "05.05.2025")!,
+                datePeak: dateFormatter.date(from: "06.05.2025")!,
                 dateEnd: dateFormatter.date(from: "28.05.2025")!,
                 zhr: 50,
                 speed: 66,
                 parentBody: "1P/Halley"
             ),
             MeteorShower(
-                name: "Delta Aquariids",
+                name: "Daytime Arietids",
+                dateBegin: dateFormatter.date(from: "14.05.2025")!,
+                datePeak: dateFormatter.date(from: "07.06.2025")!,
+                dateEnd: dateFormatter.date(from: "24.06.2025")!,
+                zhr: 30,
+                speed: 38,
+                parentBody: "Unknown"
+            ),
+            MeteorShower(
+                name: "Southern Delta Aquariids",
                 dateBegin: dateFormatter.date(from: "12.07.2025")!,
-                datePeak: dateFormatter.date(from: "28.07.2025")!,
+                datePeak: dateFormatter.date(from: "31.07.2025")!,
                 dateEnd: dateFormatter.date(from: "23.08.2025")!,
-                zhr: 20,
+                zhr: 25,
                 speed: 41,
                 parentBody: "96P/Machholz"
             ),
@@ -70,11 +88,29 @@ final class Showers {
                 parentBody: "1P/Halley"
             ),
             MeteorShower(
+                name: "Southern Taurids",
+                dateBegin: dateFormatter.date(from: "20.09.2025")!,
+                datePeak: dateFormatter.date(from: "05.11.2025")!,
+                dateEnd: dateFormatter.date(from: "20.11.2025")!,
+                zhr: 7,
+                speed: 27,
+                parentBody: "2P/Encke"
+            ),
+            MeteorShower(
+                name: "Northern Taurids",
+                dateBegin: dateFormatter.date(from: "20.10.2025")!,
+                datePeak: dateFormatter.date(from: "12.11.2025")!,
+                dateEnd: dateFormatter.date(from: "10.12.2025")!,
+                zhr: 5,
+                speed: 29,
+                parentBody: "2P/Encke"
+            ),
+            MeteorShower(
                 name: "Leonids",
                 dateBegin: dateFormatter.date(from: "06.11.2025")!,
                 datePeak: dateFormatter.date(from: "17.11.2025")!,
                 dateEnd: dateFormatter.date(from: "30.11.2025")!,
-                zhr: 15,
+                zhr: 10,
                 speed: 71,
                 parentBody: "55P/Tempel-Tuttle"
             ),
@@ -82,10 +118,19 @@ final class Showers {
                 name: "Geminids",
                 dateBegin: dateFormatter.date(from: "04.12.2025")!,
                 datePeak: dateFormatter.date(from: "14.12.2025")!,
-                dateEnd: dateFormatter.date(from: "17.12.2025")!,
+                dateEnd: dateFormatter.date(from: "20.12.2025")!,
                 zhr: 150,
                 speed: 35,
                 parentBody: "3200 Phaethon"
+            ),
+            MeteorShower(
+                name: "Ursids",
+                dateBegin: dateFormatter.date(from: "17.12.2025")!,
+                datePeak: dateFormatter.date(from: "22.12.2025")!,
+                dateEnd: dateFormatter.date(from: "26.12.2025")!,
+                zhr: 10,
+                speed: 33,
+                parentBody: "8P/Tuttle"
             )
         ]
     }()

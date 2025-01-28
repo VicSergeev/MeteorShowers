@@ -33,7 +33,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     private lazy var infoStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.alignment = .center
+        stack.alignment = .fill
         stack.distribution = .fillEqually
         
         return stack
@@ -60,6 +60,15 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         return stack
     }()
     
+    private lazy var originStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        
+        return stack
+    }()
+    
     // MARK: - Labels
     // title
     private lazy var titleLabel: UILabel = {
@@ -73,7 +82,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     // dates labels
     private lazy var datePeakLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = .gray
         label.text = "Peak: TBD"
         return label
@@ -81,7 +90,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     
     private lazy var dateBeginLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = .gray
         label.text = "Begins: TBD"
         return label
@@ -89,7 +98,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     
     private lazy var dateEndLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = .gray
         label.text = "Ends: TBD"
         return label
@@ -98,6 +107,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     // moon image
     private lazy var moonIconImageView: UIImageView = {
         let image = UIImageView(image: UIImage(systemName: "moonphase.waxing.gibbous"))
+        image.tintColor = .lightGray
         return image
     }()
     
@@ -106,7 +116,19 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
         label.textColor = .gray
-        label.text = "120 ZHR"
+        label.text = ""
+        return label
+    }()
+    
+    // Shower origin
+    private lazy var originLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray
+        label.font = .boldSystemFont(ofSize: 12)
+        label.numberOfLines = 2
+        label.textColor = .lightGray
+        label.text = "Comet"
+        
         return label
     }()
     
@@ -136,6 +158,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         
         infoStackView.addArrangedSubview(datesStackView)
         infoStackView.addArrangedSubview(moonStackView)
+        infoStackView.addArrangedSubview(originStackView)
         
         datesStackView.addArrangedSubview(dateBeginLabel)
         datesStackView.addArrangedSubview(datePeakLabel)
@@ -143,6 +166,8 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         
         moonStackView.addArrangedSubview(moonIconImageView)
         moonStackView.addArrangedSubview(ZHRLabel)
+        
+        originStackView.addArrangedSubview(originLabel)
         
         // main container
         containerView.snp.makeConstraints { make in
@@ -158,15 +183,6 @@ final class MeteorShowerTableViewCell: UITableViewCell {
             make.leading.trailing.equalToSuperview().inset(12)
         }
         
-        datesStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
-        }
-        
-        moonStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().offset(-12)
-            make.bottom.equalToSuperview()
-        }
-        
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(12)
             make.trailing.equalToSuperview().offset(-12)
@@ -179,6 +195,10 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         dateBeginLabel.text = "Begins: \(shower.formattedBeginDate)"
         datePeakLabel.text = "Peak: \(shower.formattedPeakDate)"
         dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
-        ZHRLabel.text = shower.formattedZHR
+        ZHRLabel.text = "ZHR: \(shower.zhr)"
+        originLabel.text = """
+        Origin body:
+        \(shower.parentBody)
+"""
     }
 }

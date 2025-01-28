@@ -21,14 +21,14 @@ enum MoonPhase: String, CaseIterable {
     // method gets icon from SF Symbols
     var iconName: String {
         switch self {
-        case .newMoon: return "moon.fill"
-        case .waxingCrescent: return "moon.circle.fill"
-        case .firstQuarter: return "moon.first.quarter.fill"
-        case .waxingGibbous: return "moon.gibbous.fill"
-        case .fullMoon: return "moon.stars.fill"
-        case .waningGibbous: return "moon.gibbous.inverse.fill"
-        case .lastQuarter: return "moon.last.quarter.fill"
-        case .waningCrescent: return "moon.circle"
+        case .newMoon: return "moonphase.new.moon"
+        case .waxingCrescent: return "moonphase.waxing.crescent"
+        case .firstQuarter: return "moonphase.first.quarter"
+        case .waxingGibbous: return "moonphase.waxing.gibbous"
+        case .fullMoon: return "moonphase.full.moon"
+        case .waningGibbous: return "moonphase.waning.gibbous"
+        case .lastQuarter: return "moonphase.last.quarter"
+        case .waningCrescent: return "moonphase.waning.crescent"
         }
     }
     
@@ -39,48 +39,49 @@ enum MoonPhase: String, CaseIterable {
 }
 
 struct MoonPhaseCalculation {
-
-    func getMoonPhase(date: Date) -> (phase: String, illumination: Double, age: Double) {
-        let synodicMonth: Double = 29.53058867 // average duration of synodic month
-        let knownNewMoon: Date = {
-            // closest known new moon date (UTC)
-            var components = DateComponents()
-            components.year = 2000
-            components.month = 1
-            components.day = 6
-            components.hour = 18
-            components.minute = 14
-            components.second = 0
-            return Calendar(identifier: .gregorian).date(from: components)!
-        }()
-        
-        let elapsedTime = date.timeIntervalSince(knownNewMoon) / 86400.0 // convert into days count
-        let moonAge = elapsedTime.truncatingRemainder(dividingBy: synodicMonth) // moon age
+    // Known new moon date for better accuracy
+    private let knownNewMoon: Date = {
+        var components = DateComponents()
+        components.year = 2024
+        components.month = 12
+        components.day = 31
+        components.hour = 3
+        components.minute = 27
+        components.second = 0
+        return Calendar(identifier: .gregorian).date(from: components)!
+    }()
+    
+    private let synodicMonth: Double = 29.53058867 // average duration of synodic month
+    
+    func getMoonPhase(date: Date = Date()) -> (phase: String, illumination: Double, age: Double) {
+        let elapsedTime = date.timeIntervalSince(knownNewMoon) / 86400.0 // convert to days
+        let moonAge = elapsedTime.truncatingRemainder(dividingBy: synodicMonth)
         let normalizedAge = moonAge < 0 ? moonAge + synodicMonth : moonAge
         
-        let illumination = (1 - cos(2 * .pi * normalizedAge / synodicMonth)) / 2
+        // Calculate illumination using the normalized age
+        let angleInRadians = 2 * .pi * normalizedAge / synodicMonth
+        let illumination = ((1 - cos(angleInRadians)) / 2) * 100
         
         let phase: String
         switch normalizedAge {
-        case 0..<1:
-            phase = "New Moon"
-        case 1..<7.4:
-            phase = "Waxing Crescent"
-        case 7.4..<8.9:
-            phase = "First Quarter"
-        case 8.9..<14.8:
-            phase = "Waxing Gibbous"
-        case 14.8..<15.9:
-            phase = "Full Moon"
-        case 15.9..<22.1:
-            phase = "Waning Gibbous"
-        case 22.1..<23.7:
-            phase = "Last Quarter"
+        case 0..<1.84:
+            phase = MoonPhase.newMoon.rawValue
+        case 1.84..<5.53:
+            phase = MoonPhase.waxingCrescent.rawValue
+        case 5.53..<9.22:
+            phase = MoonPhase.firstQuarter.rawValue
+        case 9.22..<12.91:
+            phase = MoonPhase.waxingGibbous.rawValue
+        case 12.91..<16.61:
+            phase = MoonPhase.fullMoon.rawValue
+        case 16.61..<20.30:
+            phase = MoonPhase.waningGibbous.rawValue
+        case 20.30..<23.99:
+            phase = MoonPhase.lastQuarter.rawValue
         default:
-            phase = "Waning Crescent"
+            phase = MoonPhase.waningCrescent.rawValue
         }
         
-        return (phase: phase, illumination: illumination * 100, age: normalizedAge)
+        return (phase: phase, illumination: illumination, age: normalizedAge)
     }
-
 }

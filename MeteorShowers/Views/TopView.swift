@@ -8,6 +8,9 @@
 import UIKit
 
 final class TopView: UIView {
+    
+    // MARK: - Properties
+    private let moonPhaseCalculator = MoonPhaseCalculation()
 
     // MARK: - UIs
     @IBOutlet weak var sunriseTimeLabel: UILabel!
@@ -29,5 +32,24 @@ final class TopView: UIView {
         // setting border radius
         self.layer.cornerRadius = 9
         self.layer.masksToBounds = true
+        
+        // Update moon phase for current date
+        let moonInfo = moonPhaseCalculator.getMoonPhase()
+        updateMoonPhaseUI(with: moonInfo)
+    }
+    
+    // MARK: - Private Methods
+    private func updateMoonPhaseUI(with moonInfo: (phase: String, illumination: Double, age: Double)) {
+        // Set moon phase label
+        moonPhaseLabel.text = moonInfo.phase
+        
+        // Set illumination with 1 decimal place
+        IlluminationLabel.text = String(format: "%.1f%%", moonInfo.illumination)
+        
+        // Set moon phase icon
+        if let moonPhase = MoonPhase.allCases.first(where: { $0.rawValue == moonInfo.phase }) {
+            moonPhaseIconImageView.image = moonPhase.icon
+            moonPhaseIconImageView.tintColor = .lightGray
+        }
     }
 }
