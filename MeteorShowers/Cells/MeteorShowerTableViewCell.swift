@@ -188,7 +188,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         dateBeginLabel.text = "Begins: \(shower.formattedBeginDate)"
         datePeakLabel.text = "Peak: \(shower.formattedPeakDate)"
         dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
-        ZHRLabel.text = "ZHR: \(shower.zhr)"
+        ZHRLabel.text = "\(shower.formattedZHR)"
         originLabel.text = """
         Origin body:
         \(shower.parentBody)

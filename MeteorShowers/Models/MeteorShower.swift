@@ -30,7 +30,7 @@ struct MeteorShower {
     }
     
     var formattedZHR: String {
-        "\(zhr) ZHR"
+        "ZHR: \(zhr)"
     }
     
     var formattedSpeed: String {
