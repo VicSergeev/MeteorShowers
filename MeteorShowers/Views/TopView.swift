@@ -24,9 +24,9 @@ final class TopView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.clipsToBounds = true
+        self.clipsToBounds = true // just in case, because in XIB this setting marked as checked
         
-        // Настройка скругления углов
+        // setting border radius
         self.layer.cornerRadius = 9
         self.layer.masksToBounds = true
     }

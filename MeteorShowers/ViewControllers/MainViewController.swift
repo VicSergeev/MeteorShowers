@@ -40,11 +40,6 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .mainBg
         setupUI()
-        
-        if let currentShower = Showers.shared.getCurrentShower() {
-            // Configure top view with current shower
-            // TODO: Add configuration method to TopView
-        }
     }
 }
 
