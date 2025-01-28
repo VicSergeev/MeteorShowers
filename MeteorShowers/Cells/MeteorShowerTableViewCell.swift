@@ -176,16 +176,9 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         
         // main stackview in main container
         mainStackView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview().offset(12)
+            make.leading.top.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-16)
         }
-        
-//        infoStackView.snp.makeConstraints { make in
-//            make.leading.trailing.equalToSuperview().inset(12)
-//        }
-        
-//        titleLabel.snp.makeConstraints { make in
-//            make.top.leading.equalToSuperview().offset(12)
-//        }
     }
     
     // MARK: - Configure cell
