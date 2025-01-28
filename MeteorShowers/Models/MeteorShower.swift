@@ -12,8 +12,28 @@ struct MeteorShower {
     let dateBegin: Date
     let datePeak: Date
     let dateEnd: Date
-    let description: String
-    let parent: String
-    let radiant: String
-    let zhr: String
+    let zhr: Int
+    let speed: Int // km/s
+    let parentBody: String
+    
+    // Formatted string getters
+    var formattedBeginDate: String {
+        dateBegin.formatted(date: .abbreviated, time: .omitted)
+    }
+    
+    var formattedPeakDate: String {
+        datePeak.formatted(date: .abbreviated, time: .omitted)
+    }
+    
+    var formattedEndDate: String {
+        dateEnd.formatted(date: .abbreviated, time: .omitted)
+    }
+    
+    var formattedZHR: String {
+        "\(zhr) ZHR"
+    }
+    
+    var formattedSpeed: String {
+        "\(speed) km/s"
+    }
 }

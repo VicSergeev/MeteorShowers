@@ -127,6 +127,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
         
+        // filling screen with contents
         contentView.addSubview(containerView)
         containerView.addSubview(mainStackView)
         
@@ -172,9 +173,12 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         }
     }
     
-    // MARK: - Configure
-    func configure(with title: String, date: String) {
-        titleLabel.text = title
-//        dateLabel.text = date
+    // MARK: - Configure cell
+    func configure(with shower: MeteorShower) {
+        titleLabel.text = shower.name
+        dateBeginLabel.text = "Begins: \(shower.formattedBeginDate)"
+        datePeakLabel.text = "Peak: \(shower.formattedPeakDate)"
+        dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
+        ZHRLabel.text = shower.formattedZHR
     }
 }

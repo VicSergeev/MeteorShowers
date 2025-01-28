@@ -10,24 +10,24 @@ import SnapKit
 
 final class MainViewController: UIViewController {
     
-    // MARK: - Setting UI
+    // MARK: - Properties
+    private let showers = Showers.shared.getAllShowers()
     
     // MARK: - Main stack
-    lazy private var mainStackView: UIStackView = {
+    private lazy var mainStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .fill
-        stackView.distribution = .fill // that will accept topView height of 160 and let TV to get the rest of space
-        
+        stackView.distribution = .fill
         return stackView
     }()
     
     // MARK: - creating view with uiview extension
-    lazy var topView: TopView = .fromNib()
+    private lazy var topView: TopView = .fromNib()
     
     // MARK: - UITableView
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let table = UITableView()
         table.backgroundColor = .clear
         table.separatorStyle = .none
@@ -40,13 +40,15 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .mainBg
         setupUI()
+        
+        if let currentShower = Showers.shared.getCurrentShower() {
+            // Configure top view with current shower
+            // TODO: Add configuration method to TopView
+        }
     }
-
-
 }
 
 // MARK: - Configuring UI
-
 private extension MainViewController {
     
     func setupUI() {
@@ -74,12 +76,10 @@ private extension MainViewController {
         tableView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
         }
-        
     }
 }
 
 // MARK: - UITableViewDelegates
-
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func setDelegates() {
@@ -88,17 +88,17 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return showers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MeteorShowerTableViewCell", for: indexPath) as! MeteorShowerTableViewCell
-        cell.configure(with: "Meteor Shower \(indexPath.row + 1)", date: "Date: January \(indexPath.row + 1), 2025")
+        let shower = showers[indexPath.row]
+        cell.configure(with: shower)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-
 }

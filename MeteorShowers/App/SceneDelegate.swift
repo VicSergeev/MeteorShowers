@@ -14,14 +14,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let customWindowScene = (scene as? UIWindowScene) else { return }
         
+        // custom window since we don't use Storyboards
         window = UIWindow(frame: customWindowScene.coordinateSpace.bounds)
         window?.windowScene = customWindowScene
         
+        // root VC
         let mainViewController = MainViewController()
         
+        // assigning root vc to nav
         let navigationController = UINavigationController(rootViewController: mainViewController)
         window?.rootViewController = navigationController
         
+        // configuring nav title
         let titleColor: UIColor = .systemBlue
         navigationController.navigationBar.largeTitleTextAttributes = [
             .foregroundColor: titleColor
@@ -29,9 +33,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         navigationController.navigationBar.titleTextAttributes = [
             .foregroundColor: titleColor
         ]
-        
         navigationController.navigationBar.prefersLargeTitles = true
-    
+        
+        // setting title to nav via mainVC
         mainViewController.title = "Meteor Showers"
         window?.makeKeyAndVisible()
     }
