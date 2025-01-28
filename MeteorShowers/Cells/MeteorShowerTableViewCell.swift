@@ -35,7 +35,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.alignment = .fill
-        stack.distribution = .fill
+        stack.distribution = .fillEqually
         
         return stack
     }()
@@ -189,9 +189,6 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         datePeakLabel.text = "Peak: \(shower.formattedPeakDate)"
         dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
         ZHRLabel.text = "\(shower.formattedZHR)"
-        originLabel.text = """
-        Origin body:
-        \(shower.parentBody)
-"""
+        originLabel.text = "\(shower.parentBody)"
     }
 }

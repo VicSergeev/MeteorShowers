@@ -13,8 +13,8 @@ struct MeteorShower {
     let datePeak: Date
     let dateEnd: Date
     let zhr: Int
-    let speed: Int // km/s
     let parentBody: String
+    // optionally you might add average speed of bolids
     
     // Formatted string getters
     var formattedBeginDate: String {
@@ -31,9 +31,5 @@ struct MeteorShower {
     
     var formattedZHR: String {
         "ZHR: \(zhr)"
-    }
-    
-    var formattedSpeed: String {
-        "\(speed) km/s"
     }
 }
