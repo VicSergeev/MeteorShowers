@@ -24,6 +24,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
+        stack.spacing = 8
         stack.distribution = .fillProportionally
         
         return stack
@@ -44,6 +45,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     private lazy var datesStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
+        stack.spacing = 8
         stack.alignment = .fill
         stack.distribution = .fillEqually
         
@@ -64,8 +66,8 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .leading
-        stack.spacing = 10
-        stack.distribution = .fillEqually
+        stack.spacing = 8
+        stack.distribution = .equalCentering
         
         return stack
     }()
