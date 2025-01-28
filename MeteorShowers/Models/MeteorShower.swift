@@ -13,8 +13,8 @@ struct MeteorShower {
     let datePeak: Date
     let dateEnd: Date
     let zhr: Int
+    let speed: Int // optional you might add this value, but it's average, I don't see any point off adding it
     let parentBody: String
-    // optionally you might add average speed of bolids
     
     // Formatted string getters
     var formattedBeginDate: String {
@@ -27,6 +27,13 @@ struct MeteorShower {
     
     var formattedEndDate: String {
         dateEnd.formatted(date: .abbreviated, time: .omitted)
+    }
+    
+    var parentBodyLabel: String {
+        """
+ Parent body: 
+ \(parentBody)
+"""
     }
     
     var formattedZHR: String {
