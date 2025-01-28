@@ -133,6 +133,8 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         return label
     }()
     
+    // Add moonPhaseCalculator property
+    private let moonPhaseCalculator = MoonPhaseCalculation()
     
     // MARK: - Initialization
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -190,5 +192,11 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
         ZHRLabel.text = "\(shower.formattedZHR)"
         originLabel.text = "\(shower.parentBodyLabel)"
+        
+        // Calculate moon phase for shower's peak date
+        let moonPhase = moonPhaseCalculator.getMoonPhase(date: shower.datePeak)
+        if let phase = MoonPhase(rawValue: moonPhase.phase) {
+            moonIconImageView.image = phase.icon
+        }
     }
 }
