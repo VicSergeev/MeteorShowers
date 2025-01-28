@@ -74,7 +74,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .gray
+        label.textColor = .lightGray
         label.text = "Meteor Shower"
         return label
     }()
@@ -82,15 +82,15 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     // dates labels
     private lazy var datePeakLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .gray
+        label.font = .systemFont(ofSize: 12, weight: .heavy)
+        label.textColor = .lightGray
         label.text = "Peak: TBD"
         return label
     }()
     
     private lazy var dateBeginLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 11)
         label.textColor = .gray
         label.text = "Begins: TBD"
         return label
@@ -124,7 +124,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     private lazy var originLabel: UILabel = {
         let label = UILabel()
         label.textColor = .gray
-        label.font = .boldSystemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 12, weight: .heavy)
         label.numberOfLines = 2
         label.textColor = .lightGray
         label.text = "Comet"
