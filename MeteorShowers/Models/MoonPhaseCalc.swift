@@ -6,6 +6,37 @@
 //
 
 import Foundation
+import UIKit
+
+enum MoonPhase: String, CaseIterable {
+    case newMoon = "New Moon"
+    case waxingCrescent = "Waxing Crescent"
+    case firstQuarter = "First Quarter"
+    case waxingGibbous = "Waxing Gibbous"
+    case fullMoon = "Full Moon"
+    case waningGibbous = "Waning Gibbous"
+    case lastQuarter = "Last Quarter"
+    case waningCrescent = "Waning Crescent"
+    
+    // method gets icon from SF Symbols
+    var iconName: String {
+        switch self {
+        case .newMoon: return "moon.fill"
+        case .waxingCrescent: return "moon.circle.fill"
+        case .firstQuarter: return "moon.first.quarter.fill"
+        case .waxingGibbous: return "moon.gibbous.fill"
+        case .fullMoon: return "moon.stars.fill"
+        case .waningGibbous: return "moon.gibbous.inverse.fill"
+        case .lastQuarter: return "moon.last.quarter.fill"
+        case .waningCrescent: return "moon.circle"
+        }
+    }
+    
+    // method getting icon and convert it to UIImage
+    var icon: UIImage? {
+        return UIImage(systemName: self.iconName)
+    }
+}
 
 struct MoonPhaseCalculation {
 
