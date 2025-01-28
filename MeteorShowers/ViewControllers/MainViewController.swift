@@ -27,7 +27,13 @@ final class MainViewController: UIViewController {
     lazy var topView: TopView = .fromNib()
     
     // MARK: - UITableView
-    var tableView = UITableView()
+    lazy var tableView: UITableView = {
+        let table = UITableView()
+        table.backgroundColor = .clear
+        table.separatorStyle = .none
+        table.showsVerticalScrollIndicator = false
+        return table
+    }()
 
     // MARK: - viewDidLoad
     override func viewDidLoad() {
@@ -51,19 +57,18 @@ private extension MainViewController {
         mainStackView.addArrangedSubview(tableView)
         
         // MARK: - Cell registration
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(MeteorShowerTableViewCell.self, forCellReuseIdentifier: "MeteorShowerTableViewCell")
         
         // constraints
         mainStackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top) // changed to respect safe area
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
         }
         
         topView.snp.makeConstraints { make in
-            make.height.equalTo(200) // constraint topview height
-//            make.width.equalToSuperview().inset(8)
+            make.height.equalTo(100)
         }
         
         tableView.snp.makeConstraints { make in
@@ -87,8 +92,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MeteorShowerTableViewCell", for: indexPath) as! MeteorShowerTableViewCell
+        cell.configure(with: "Meteor Shower \(indexPath.row + 1)", date: "Date: January \(indexPath.row + 1), 2025")
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
 
 }

@@ -21,8 +21,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController(rootViewController: mainViewController)
         window?.rootViewController = navigationController
-        navigationController.navigationBar.prefersLargeTitles = true
         
+        let titleColor: UIColor = .systemBlue
+        navigationController.navigationBar.largeTitleTextAttributes = [
+            .foregroundColor: titleColor
+        ]
+        navigationController.navigationBar.titleTextAttributes = [
+            .foregroundColor: titleColor
+        ]
+        
+        navigationController.navigationBar.prefersLargeTitles = true
+    
         mainViewController.title = "Meteor Showers"
         window?.makeKeyAndVisible()
     }
