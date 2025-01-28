@@ -24,7 +24,6 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.alignment = .fill
-        stack.spacing = 8
         stack.distribution = .fillProportionally
         
         return stack
@@ -34,6 +33,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     private lazy var infoStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
+        stack.spacing = 1
         stack.alignment = .fill
         stack.distribution = .fillEqually
         
@@ -51,11 +51,20 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     }()
     
     // used for moon phase, img+zhr label
+    private lazy var moonAndOriginStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fillEqually
+        
+        return stack
+    }()
+    
     private lazy var moonStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.alignment = .center
-        stack.spacing = 16
+        stack.alignment = .leading
+        stack.spacing = 10
         stack.distribution = .fillEqually
         
         return stack
@@ -64,7 +73,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     private lazy var originStackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
-        stack.alignment = .fill
+        stack.alignment = .leading
         stack.distribution = .fillEqually
         
         return stack
@@ -116,6 +125,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     private lazy var ZHRLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textAlignment = .left
         label.textColor = .gray
         label.text = ""
         return label
@@ -160,15 +170,17 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         mainStackView.addArrangedSubview(infoStackView)
         
         infoStackView.addArrangedSubview(datesStackView)
-        infoStackView.addArrangedSubview(moonStackView)
-        infoStackView.addArrangedSubview(originStackView)
+        infoStackView.addArrangedSubview(moonAndOriginStackView)
+        
+        moonAndOriginStackView.addArrangedSubview(moonStackView)
+        moonAndOriginStackView.addArrangedSubview(originStackView)
+        
+        moonStackView.addArrangedSubview(moonIconImageView)
+        moonStackView.addArrangedSubview(ZHRLabel)
         
         datesStackView.addArrangedSubview(dateBeginLabel)
         datesStackView.addArrangedSubview(datePeakLabel)
         datesStackView.addArrangedSubview(dateEndLabel)
-        
-        moonStackView.addArrangedSubview(moonIconImageView)
-        moonStackView.addArrangedSubview(ZHRLabel)
         
         originStackView.addArrangedSubview(originLabel)
         

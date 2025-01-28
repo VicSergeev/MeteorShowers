@@ -18,15 +18,21 @@ struct MeteorShower {
     
     // Formatted string getters
     var formattedBeginDate: String {
-        dateBegin.formatted(date: .abbreviated, time: .omitted)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: dateBegin)
     }
     
     var formattedPeakDate: String {
-        datePeak.formatted(date: .abbreviated, time: .omitted)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: datePeak)
     }
     
     var formattedEndDate: String {
-        dateEnd.formatted(date: .abbreviated, time: .omitted)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: dateEnd)
     }
     
     var parentBodyLabel: String {
