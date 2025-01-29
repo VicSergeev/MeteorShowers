@@ -4,6 +4,8 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to calculate accurate sunrise and sunset times for your area.</string>
+	<key>NSUserNotificationUsageDescription</key>
+	<string>We'll notify you 3 days before meteor shower peaks so you don't miss the show!</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

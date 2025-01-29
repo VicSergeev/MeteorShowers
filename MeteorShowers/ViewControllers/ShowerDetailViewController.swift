@@ -7,11 +7,24 @@
 
 import UIKit
 import SnapKit
+import UserNotifications
 
 final class ShowerDetailViewController: UIViewController {
     
-    // Add moonPhaseCalculator property
+    // MARK: - Properties
     private let moonPhaseCalculator = MoonPhaseCalculation()
+    private var currentShower: MeteorShower?
+    private var hasReminder = false
+    private lazy var reminderButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            image: UIImage(systemName: "bell.fill"),
+            style: .plain,
+            target: self,
+            action: #selector(reminderButtonTapped)
+        )
+        button.tintColor = .systemGreen
+        return button
+    }()
     
     // MARK: - Main stack
     lazy private var mainStackView: UIStackView = {
@@ -119,6 +132,7 @@ final class ShowerDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .topBg
         setupUI()
+        setupNavigationBar()
     }
 
 }
@@ -127,8 +141,6 @@ final class ShowerDetailViewController: UIViewController {
 extension ShowerDetailViewController {
     func setupUI() {
         view.addSubview(mainStackView)
-        
-        navigationItem.largeTitleDisplayMode = .never
         
         mainStackView.addArrangedSubview(topContentStackView)
         mainStackView.addArrangedSubview(midContentStackView)
@@ -155,12 +167,118 @@ extension ShowerDetailViewController {
             make.centerX.equalToSuperview()
         }
     }
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = reminderButton
+        navigationItem.largeTitleDisplayMode = .never
+        updateReminderButtonState()
+    }
+    
+    private func updateReminderButtonState() {
+        guard let shower = currentShower else { return }
+        
+        let identifier = "meteorShower-\(shower.name)"
+        UNUserNotificationCenter.current().getPendingNotificationRequests { [weak self] requests in
+            let hasReminder = requests.contains { $0.identifier == identifier }
+            DispatchQueue.main.async {
+                self?.hasReminder = hasReminder
+                self?.reminderButton.image = UIImage(systemName: hasReminder ? "bell.slash.fill" : "bell.fill")
+            }
+        }
+    }
+    
+    @objc private func reminderButtonTapped() {
+        if hasReminder {
+            removeNotification()
+        } else {
+            requestNotificationPermission()
+        }
+    }
+    
+    private func removeNotification() {
+        guard let shower = currentShower else { return }
+        
+        let identifier = "meteorShower-\(shower.name)"
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+        
+        // Update UI and show feedback
+        hasReminder = false
+        reminderButton.image = UIImage(systemName: "bell.fill")
+        
+        let alert = UIAlertController(
+            title: "Reminder Removed",
+            message: "The reminder for \(shower.name) meteor shower has been removed.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, error in
+            if granted {
+                DispatchQueue.main.async {
+                    self?.scheduleNotification()
+                }
+            } else {
+                // Handle case when permission is not granted
+                print("Notification permission denied")
+            }
+        }
+    }
+    
+    private func scheduleNotification() {
+        guard let shower = currentShower else { return }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Upcoming Meteor Shower!"
+        content.body = "\(shower.name) meteor shower peaks in 3 days! Get ready for the show!"
+        content.sound = .default
+        
+        // Calculate notification date (3 days before peak)
+        let peakDate = shower.datePeak
+        let notificationDate = Calendar.current.date(byAdding: .day, value: -3, to: peakDate)!
+        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: notificationDate)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        let request = UNNotificationRequest(
+            identifier: "meteorShower-\(shower.name)",
+            content: content,
+            trigger: trigger
+        )
+        
+        UNUserNotificationCenter.current().add(request) { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error scheduling notification: \(error)")
+                    self?.showNotificationAlert(success: false)
+                } else {
+                    print("Notification scheduled for \(shower.name)")
+                    self?.hasReminder = true
+                    self?.reminderButton.image = UIImage(systemName: "bell.slash.fill")
+                    self?.showNotificationAlert(success: true)
+                }
+            }
+        }
+    }
+    
+    private func showNotificationAlert(success: Bool) {
+        let title = success ? "Reminder Set!" : "Error"
+        let message = success ? 
+            "You'll be notified 3 days before the \(currentShower?.name ?? "") meteor shower peaks." :
+            "Failed to set reminder. Please check if notifications are enabled in Settings."
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - Fill with contents
 
 extension ShowerDetailViewController {
     func configure(with shower: MeteorShower) {
+        currentShower = shower
         navigationItem.title = shower.name
         peakLabel.text = "Peak: \(shower.formattedPeakDate)"
         ZHRLabel.text = "\(shower.formattedZHR)"
@@ -172,6 +290,9 @@ extension ShowerDetailViewController {
             moonPhaseIcon.image = phase.icon
             moonPhaseLabel.text = moonPhase.phase
         }
+        
+        // Check if reminder exists
+        updateReminderButtonState()
     }
     
     private func updateMoonPhase() {
