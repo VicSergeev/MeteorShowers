@@ -12,6 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
+        // MARK: - since we don't use storyboards - this must be implemented
         guard let customWindowScene = (scene as? UIWindowScene) else { return }
         
         // custom window since we don't use Storyboards
