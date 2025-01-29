@@ -36,10 +36,7 @@ struct MeteorShower {
     }
     
     var parentBodyLabel: String {
-        """
- Parent body: 
- \(parentBody)
-"""
+        "\(parentBody)"
     }
     
     var formattedZHR: String {

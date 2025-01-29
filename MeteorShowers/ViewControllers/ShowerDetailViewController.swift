@@ -19,18 +19,38 @@ final class ShowerDetailViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 8
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         
         return stackView
     }()
     
     // MARK: - content stack
-    lazy private var contentStackView: UIStackView = {
+    lazy private var topContentStackView: UIStackView = {
         var stackView = UIStackView()
-        stackView.axis = .vertical
+        stackView.axis = .horizontal
         stackView.spacing = 8
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
+    lazy private var midContentStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
+    lazy private var bottomContentStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 25
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
         
         return stackView
     }()
@@ -55,21 +75,24 @@ final class ShowerDetailViewController: UIViewController {
     
     lazy private var peakLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textColor = .lightGray
         label.textAlignment = .center
         return label
     }()
     
     lazy private var ZHRLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .lightGray
         label.textAlignment = .center
         return label
     }()
     
     lazy private var originLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .lightGray
         label.textAlignment = .center
         return label
     }()
@@ -99,14 +122,15 @@ extension ShowerDetailViewController {
         
         navigationItem.largeTitleDisplayMode = .never
         
-        mainStackView.addArrangedSubview(notificationIcon)
-        mainStackView.addArrangedSubview(contentStackView)
+        mainStackView.addArrangedSubview(topContentStackView)
+        mainStackView.addArrangedSubview(midContentStackView)
+        mainStackView.addArrangedSubview(bottomContentStackView)
         
-        contentStackView.addArrangedSubview(mainImageView)
-        contentStackView.addArrangedSubview(peakLabel)
-        contentStackView.addArrangedSubview(ZHRLabel)
-        contentStackView.addArrangedSubview(originLabel)
-        contentStackView.addArrangedSubview(moonPhaseIcon)
+        topContentStackView.addArrangedSubview(mainImageView)
+        midContentStackView.addArrangedSubview(peakLabel)
+        midContentStackView.addArrangedSubview(ZHRLabel)
+        bottomContentStackView.addArrangedSubview(originLabel)
+        bottomContentStackView.addArrangedSubview(moonPhaseIcon)
         
         mainStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
@@ -131,7 +155,7 @@ extension ShowerDetailViewController {
         navigationItem.title = shower.name
         peakLabel.text = "Peak: \(shower.formattedPeakDate)"
         ZHRLabel.text = "\(shower.formattedZHR)"
-        originLabel.text = "\(shower.parentBodyLabel)"
+        originLabel.text = "Parent body: \(shower.parentBodyLabel)"
         
         // Calculate moon phase for shower's peak date
         let moonPhase = moonPhaseCalculator.getMoonPhase(date: shower.datePeak)

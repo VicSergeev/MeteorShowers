@@ -205,7 +205,10 @@ final class MeteorShowerTableViewCell: UITableViewCell {
         datePeakLabel.text = "Peak: \(shower.formattedPeakDate)"
         dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
         ZHRLabel.text = "\(shower.formattedZHR)"
-        originLabel.text = "\(shower.parentBodyLabel)"
+        originLabel.text = """
+Parent body:
+    \(shower.parentBodyLabel)
+"""
         
         // Calculate moon phase for shower's peak date
         let moonPhase = moonPhaseCalculator.getMoonPhase(date: shower.datePeak)
