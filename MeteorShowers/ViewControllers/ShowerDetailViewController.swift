@@ -35,15 +35,6 @@ final class ShowerDetailViewController: UIViewController {
         return stackView
     }()
     
-    // MARK: - contents
-    lazy private var titleLabel: UILabel = {
-        var label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .lightGray
-        label.textAlignment = .center
-        return label
-    }()
-    
     lazy private var mainImageView: UIImageView = {
         var imageView = UIImageView()
         imageView.image = UIImage(systemName: "moon")
@@ -106,7 +97,8 @@ extension ShowerDetailViewController {
     func setupUI() {
         view.addSubview(mainStackView)
         
-        mainStackView.addArrangedSubview(titleLabel)
+        navigationItem.largeTitleDisplayMode = .never
+        
         mainStackView.addArrangedSubview(notificationIcon)
         mainStackView.addArrangedSubview(contentStackView)
         
@@ -136,10 +128,8 @@ extension ShowerDetailViewController {
 
 extension ShowerDetailViewController {
     func configure(with shower: MeteorShower) {
-        titleLabel.text = shower.name
-//        dateBeginLabel.text = "Begins: \(shower.formattedBeginDate)"
+        navigationItem.title = shower.name
         peakLabel.text = "Peak: \(shower.formattedPeakDate)"
-//        dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
         ZHRLabel.text = "\(shower.formattedZHR)"
         originLabel.text = "\(shower.parentBodyLabel)"
         
