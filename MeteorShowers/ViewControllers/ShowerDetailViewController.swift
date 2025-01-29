@@ -48,7 +48,7 @@ final class ShowerDetailViewController: UIViewController {
     lazy private var bottomContentStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 25
+        stackView.spacing = 16
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         
@@ -75,7 +75,7 @@ final class ShowerDetailViewController: UIViewController {
     
     lazy private var peakLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = .systemFont(ofSize: 17, weight: .bold)
         label.textColor = .lightGray
         label.textAlignment = .center
         return label
@@ -92,6 +92,14 @@ final class ShowerDetailViewController: UIViewController {
     lazy private var originLabel: UILabel = {
         var label = UILabel()
         label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .lightGray
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy private var moonPhaseLabel: UILabel = {
+        var label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .lightGray
         label.textAlignment = .center
         return label
@@ -129,7 +137,8 @@ extension ShowerDetailViewController {
         topContentStackView.addArrangedSubview(mainImageView)
         midContentStackView.addArrangedSubview(peakLabel)
         midContentStackView.addArrangedSubview(ZHRLabel)
-        bottomContentStackView.addArrangedSubview(originLabel)
+        mainStackView.addArrangedSubview(originLabel)
+        bottomContentStackView.addArrangedSubview(moonPhaseLabel)
         bottomContentStackView.addArrangedSubview(moonPhaseIcon)
         
         mainStackView.snp.makeConstraints { make in
@@ -161,6 +170,16 @@ extension ShowerDetailViewController {
         let moonPhase = moonPhaseCalculator.getMoonPhase(date: shower.datePeak)
         if let phase = MoonPhase(rawValue: moonPhase.phase) {
             moonPhaseIcon.image = phase.icon
+            moonPhaseLabel.text = moonPhase.phase
         }
+    }
+    
+    private func updateMoonPhase() {
+        let moonInfo = moonPhaseCalculator.getMoonPhase()
+        updateMoonPhaseUI(with: moonInfo)
+    }
+    
+    private func updateMoonPhaseUI(with moonInfo: (phase: String, illumination: Double, age: Double)) {
+        moonPhaseLabel.text = moonInfo.phase
     }
 }
