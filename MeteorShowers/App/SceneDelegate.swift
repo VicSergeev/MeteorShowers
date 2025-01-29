@@ -16,6 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // MARK: - since we don't use storyboards - this must be implemented
         guard let customWindowScene = (scene as? UIWindowScene) else { return }
         
+        // Restore reminders when app launches
+        RemindersManager.shared.restoreAllReminders()
+        
         // custom window since we don't use Storyboards
         window = UIWindow(frame: customWindowScene.coordinateSpace.bounds)
         window?.windowScene = customWindowScene
@@ -72,4 +75,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
 }
-

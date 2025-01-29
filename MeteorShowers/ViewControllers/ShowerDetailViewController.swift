@@ -13,6 +13,7 @@ final class ShowerDetailViewController: UIViewController {
     
     // MARK: - Properties
     private let moonPhaseCalculator = MoonPhaseCalculation()
+    private let remindersManager = RemindersManager.shared
     private var currentShower: MeteorShower?
     private var hasReminder = false
     private lazy var reminderButton: UIBarButtonItem = {
@@ -177,14 +178,9 @@ extension ShowerDetailViewController {
     private func updateReminderButtonState() {
         guard let shower = currentShower else { return }
         
-        let identifier = "meteorShower-\(shower.name)"
-        UNUserNotificationCenter.current().getPendingNotificationRequests { [weak self] requests in
-            let hasReminder = requests.contains { $0.identifier == identifier }
-            DispatchQueue.main.async {
-                self?.hasReminder = hasReminder
-                self?.reminderButton.image = UIImage(systemName: hasReminder ? "bell.slash.fill" : "bell.fill")
-            }
-        }
+        let hasReminder = remindersManager.hasReminder(for: shower)
+        self.hasReminder = hasReminder
+        reminderButton.image = UIImage(systemName: hasReminder ? "bell.slash.fill" : "bell.fill")
     }
     
     @objc private func reminderButtonTapped() {
@@ -198,8 +194,7 @@ extension ShowerDetailViewController {
     private func removeNotification() {
         guard let shower = currentShower else { return }
         
-        let identifier = "meteorShower-\(shower.name)"
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
+        remindersManager.removeReminder(for: shower)
         
         // Update UI and show feedback
         hasReminder = false
@@ -254,6 +249,8 @@ extension ShowerDetailViewController {
                     self?.showNotificationAlert(success: false)
                 } else {
                     print("Notification scheduled for \(shower.name)")
+                    // Save to persistent storage
+                    self?.remindersManager.saveReminder(for: shower)
                     self?.hasReminder = true
                     self?.reminderButton.image = UIImage(systemName: "bell.slash.fill")
                     self?.showNotificationAlert(success: true)
