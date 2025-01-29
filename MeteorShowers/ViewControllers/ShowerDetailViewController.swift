@@ -10,6 +10,9 @@ import SnapKit
 
 final class ShowerDetailViewController: UIViewController {
     
+    // Add moonPhaseCalculator property
+    private let moonPhaseCalculator = MoonPhaseCalculation()
+    
     // MARK: - Main stack
     lazy private var mainStackView: UIStackView = {
         var stackView = UIStackView()
@@ -21,7 +24,7 @@ final class ShowerDetailViewController: UIViewController {
         return stackView
     }()
     
-    // MARK: - Main stack
+    // MARK: - content stack
     lazy private var contentStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.axis = .vertical
@@ -32,9 +35,11 @@ final class ShowerDetailViewController: UIViewController {
         return stackView
     }()
     
+    // MARK: - contents
     lazy private var titleLabel: UILabel = {
         var label = UILabel()
         label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .lightGray
         label.textAlignment = .center
         return label
     }()
@@ -56,14 +61,47 @@ final class ShowerDetailViewController: UIViewController {
         }
         return imageView
     }()
-
+    
+    lazy private var peakLabel: UILabel = {
+        var label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy private var ZHRLabel: UILabel = {
+        var label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy private var originLabel: UILabel = {
+        var label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy private var moonPhaseIcon: UIImageView = {
+        var imageView = UIImageView()
+        imageView.image = UIImage(systemName: "moon")
+        imageView.tintColor = .lightGray
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    
+    // MARK: - life cycle method
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .topBg
         setupUI()
     }
 
 }
 
+// MARK: - Setup UI
 extension ShowerDetailViewController {
     func setupUI() {
         view.addSubview(mainStackView)
@@ -73,14 +111,42 @@ extension ShowerDetailViewController {
         mainStackView.addArrangedSubview(contentStackView)
         
         contentStackView.addArrangedSubview(mainImageView)
+        contentStackView.addArrangedSubview(peakLabel)
+        contentStackView.addArrangedSubview(ZHRLabel)
+        contentStackView.addArrangedSubview(originLabel)
+        contentStackView.addArrangedSubview(moonPhaseIcon)
         
-        
-        mainImageView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+        mainStackView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
         }
         
-        contentStackView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().offset(12)
+        mainImageView.snp.makeConstraints { make in
+            make.height.equalTo(200)
+        }
+        
+        moonPhaseIcon.snp.makeConstraints { make in
+            make.height.width.equalTo(48)
+            make.centerX.equalToSuperview()
+        }
+    }
+}
+
+// MARK: - Fill with contents
+
+extension ShowerDetailViewController {
+    func configure(with shower: MeteorShower) {
+        titleLabel.text = shower.name
+//        dateBeginLabel.text = "Begins: \(shower.formattedBeginDate)"
+        peakLabel.text = "Peak: \(shower.formattedPeakDate)"
+//        dateEndLabel.text = "Ends: \(shower.formattedEndDate)"
+        ZHRLabel.text = "\(shower.formattedZHR)"
+        originLabel.text = "\(shower.parentBodyLabel)"
+        
+        // Calculate moon phase for shower's peak date
+        let moonPhase = moonPhaseCalculator.getMoonPhase(date: shower.datePeak)
+        if let phase = MoonPhase(rawValue: moonPhase.phase) {
+            moonPhaseIcon.image = phase.icon
         }
     }
 }

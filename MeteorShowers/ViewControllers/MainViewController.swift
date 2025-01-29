@@ -96,4 +96,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 115
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = ShowerDetailViewController()
+        let selectedShower = showers[indexPath.row]
+        detailViewController.configure(with: selectedShower)
+        
+        if let navigationController = navigationController {
+            navigationController.pushViewController(detailViewController, animated: true)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
