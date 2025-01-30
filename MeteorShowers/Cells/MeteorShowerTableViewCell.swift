@@ -13,7 +13,7 @@ final class MeteorShowerTableViewCell: UITableViewCell {
     // MARK: - UI Elements
     private lazy var containerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .topBg
+        view.backgroundColor = .lightMidnight
         view.layer.cornerRadius = 9
         view.clipsToBounds = true
         return view

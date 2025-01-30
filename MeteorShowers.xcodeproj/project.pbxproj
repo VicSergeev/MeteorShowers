@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57BDB0152D4B641B0013AC04 /* OpenMeteoSdk in Frameworks */ = {isa = PBXBuildFile; productRef = 57BDB0142D4B641B0013AC04 /* OpenMeteoSdk */; };
+		57BDB0182D4BA6FD0013AC04 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 57BDB0172D4BA6FD0013AC04 /* Alamofire */; };
 		57E994872D4652F900912D66 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 57E994862D4652F900912D66 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57BDB0182D4BA6FD0013AC04 /* Alamofire in Frameworks */,
+				57BDB0152D4B641B0013AC04 /* OpenMeteoSdk in Frameworks */,
 				57E994872D4652F900912D66 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +88,8 @@
 			name = MeteorShowers;
 			packageProductDependencies = (
 				57E994862D4652F900912D66 /* SnapKit */,
+				57BDB0142D4B641B0013AC04 /* OpenMeteoSdk */,
+				57BDB0172D4BA6FD0013AC04 /* Alamofire */,
 			);
 			productName = MeteorShowers;
 			productReference = 57E9946B2D46517500912D66 /* MeteorShowers.app */;
@@ -115,6 +121,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				57E994852D4652F900912D66 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				57BDB0132D4B641B0013AC04 /* XCRemoteSwiftPackageReference "sdk" */,
+				57BDB0162D4BA6FD0013AC04 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 57E9946C2D46517500912D66 /* Products */;
@@ -356,6 +364,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		57BDB0132D4B641B0013AC04 /* XCRemoteSwiftPackageReference "sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/open-meteo/sdk.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		57BDB0162D4BA6FD0013AC04 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 		57E994852D4652F900912D66 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -367,6 +391,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		57BDB0142D4B641B0013AC04 /* OpenMeteoSdk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57BDB0132D4B641B0013AC04 /* XCRemoteSwiftPackageReference "sdk" */;
+			productName = OpenMeteoSdk;
+		};
+		57BDB0172D4BA6FD0013AC04 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57BDB0162D4BA6FD0013AC04 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		57E994862D4652F900912D66 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 57E994852D4652F900912D66 /* XCRemoteSwiftPackageReference "SnapKit" */;

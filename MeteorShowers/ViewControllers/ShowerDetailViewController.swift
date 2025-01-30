@@ -131,7 +131,7 @@ final class ShowerDetailViewController: UIViewController {
     // MARK: - life cycle method
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .topBg
+        view.backgroundColor = .darkMidnight
         setupUI()
         setupNavigationBar()
     }

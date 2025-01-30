@@ -38,7 +38,7 @@ final class MainViewController: UIViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .mainBg
+        view.backgroundColor = .darkMidnight
         setupUI()
     }
 }

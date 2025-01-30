@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
         
         // configuring nav title
-        let titleColor: UIColor = .systemBlue
+        let titleColor: UIColor = .lightMidnight1
         navigationController.navigationBar.largeTitleTextAttributes = [
             .foregroundColor: titleColor
         ]
