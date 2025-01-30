@@ -39,7 +39,17 @@ final class ShowerDetailViewController: UIViewController {
     }()
     
     // MARK: - content stack
-    lazy private var topContentStackView: UIStackView = {
+    lazy private var imageStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .center
+        stackView.distribution = .equalCentering
+        
+        return stackView
+    }()
+    
+    lazy private var infoStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -49,20 +59,29 @@ final class ShowerDetailViewController: UIViewController {
         return stackView
     }()
     
-    lazy private var midContentStackView: UIStackView = {
-        var stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        
-        return stackView
-    }()
-    
-    lazy private var bottomContentStackView: UIStackView = {
+    lazy private var bodyPeakAndZHRStackView: UIStackView = {
         var stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 16
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
+    lazy private var moonStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        
+        return stackView
+    }()
+    
+    lazy private var descriptionStackView: UIStackView = {
+        var stackView = UIStackView()
+        stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         
@@ -71,8 +90,11 @@ final class ShowerDetailViewController: UIViewController {
     
     lazy private var mainImageView: UIImageView = {
         var imageView = UIImageView()
-        imageView.image = UIImage(systemName: "moon")
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "mock.jpeg")
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = .lightMidnight
+        imageView.layer.cornerRadius = 12
         return imageView
     }()
     
@@ -105,7 +127,7 @@ final class ShowerDetailViewController: UIViewController {
     
     lazy private var originLabel: UILabel = {
         var label = UILabel()
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.font = .systemFont(ofSize: 14, weight: .thin)
         label.textColor = .lightGray
         label.textAlignment = .center
         return label
@@ -127,6 +149,14 @@ final class ShowerDetailViewController: UIViewController {
         return imageView
     }()
     
+    lazy private var descriptionLabel: UILabel = {
+        var label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textAlignment = .center
+        label.text = "description"
+        return label
+    }()
+    
     
     // MARK: - life cycle method
     override func viewDidLoad() {
@@ -143,16 +173,21 @@ extension ShowerDetailViewController {
     func setupUI() {
         view.addSubview(mainStackView)
         
-        mainStackView.addArrangedSubview(topContentStackView)
-        mainStackView.addArrangedSubview(midContentStackView)
-        mainStackView.addArrangedSubview(bottomContentStackView)
+        mainStackView.addArrangedSubview(imageStackView)
+        mainStackView.addArrangedSubview(infoStackView)
+        mainStackView.addArrangedSubview(descriptionStackView)
+
+        imageStackView.addArrangedSubview(mainImageView)
         
-        topContentStackView.addArrangedSubview(mainImageView)
-        midContentStackView.addArrangedSubview(peakLabel)
-        midContentStackView.addArrangedSubview(ZHRLabel)
-        mainStackView.addArrangedSubview(originLabel)
-        bottomContentStackView.addArrangedSubview(moonPhaseLabel)
-        bottomContentStackView.addArrangedSubview(moonPhaseIcon)
+        infoStackView.addArrangedSubview(bodyPeakAndZHRStackView)
+        infoStackView.addArrangedSubview(moonStackView)
+        
+        bodyPeakAndZHRStackView.addArrangedSubview(peakLabel)
+        bodyPeakAndZHRStackView.addArrangedSubview(ZHRLabel)
+        bodyPeakAndZHRStackView.addArrangedSubview(originLabel)
+        
+        moonStackView.addArrangedSubview(moonPhaseIcon)
+        moonStackView.addArrangedSubview(moonPhaseLabel)
         
         mainStackView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
@@ -160,7 +195,12 @@ extension ShowerDetailViewController {
         }
         
         mainImageView.snp.makeConstraints { make in
-            make.height.equalTo(200)
+            make.height.equalTo(210)
+            make.width.equalTo(imageStackView.snp.width)
+        }
+        
+        imageStackView.snp.makeConstraints { make in
+            make.height.equalTo(210)
         }
         
         moonPhaseIcon.snp.makeConstraints { make in
