@@ -103,6 +103,22 @@ final class TopView: UIView {
             }
         }
     }
+    
+    private func updateWeather(for location: CLLocation) {
+        Task {
+            do {
+                let weatherData = try await NetworkManager.shared.fetchWeather(for: location)
+                await MainActor.run {
+                    tempLabel.text = String(format: "%.1f°C", weatherData.current.temperature)
+                    if let condition = weatherData.current.condition {
+                        forecastIconImageView.image = UIImage(systemName: condition.systemIconName)
+                    }
+                }
+            } catch {
+                print("Error fetching weather: \(error)")
+            }
+        }
+    }
 }
 
 // MARK: - LocationManagerDelegate
@@ -110,6 +126,7 @@ extension TopView: LocationManagerDelegate {
     func locationManager(_ manager: LocationManager, didUpdateLocation location: CLLocation) {
         DispatchQueue.main.async { [weak self] in
             self?.updateSunTimes(for: location)
+            self?.updateWeather(for: location)
         }
     }
     
@@ -118,6 +135,7 @@ extension TopView: LocationManagerDelegate {
             // Use Moscow coordinates as fallback
             let moscowLocation = CLLocation(latitude: 55.7558, longitude: 37.6173)
             self?.updateSunTimes(for: moscowLocation)
+            self?.updateWeather(for: moscowLocation)
         }
     }
 }
